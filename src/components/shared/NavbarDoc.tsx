@@ -26,25 +26,25 @@ export default function Navbar({ className }: { className?: string }) {
                   <ProductItem
                      title="Demo Product 1"
                      href="#"
-                     src="/demo1.png"
+                     src="/buddhadeb.png"
                      description="Description for Demo Product 1."
                   />
                   <ProductItem
                      title="Demo Product 2"
                      href="#"
-                     src="/demo2.png"
+                     src="/buddhadeb.png"
                      description="Description for Demo Product 2."
                   />
                   <ProductItem
                      title="Demo Product 3"
                      href="#"
-                     src="/demo3.png"
+                     src="/buddhadeb.png"
                      description="Description for Demo Product 3."
                   />
                   <ProductItem
                      title="Demo Product 4"
                      href="#"
-                     src="/demo4.png"
+                     src="/buddhadeb.png"
                      description="Description for Demo Product 4."
                   />
                </div>
