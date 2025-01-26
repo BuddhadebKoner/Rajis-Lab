@@ -6,9 +6,9 @@ import React from "react";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import Image from "next/image";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import { WobbleCard } from "@/components/ui/wobble-card";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import Link from "next/link";
 
 const content = [
   {
@@ -119,42 +119,30 @@ const projects = [
 const testimonials = [
   {
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+    name: "Sarah Chen",
+    designation: "Product Manager at TechFlow",
+    src: "/buddhadeb.png",
   },
   {
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
-  },
-  {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
-  },
-  {
-    quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
-  },
-  {
-    quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+    name: "Michael Rodriguez",
+    designation: "CTO at InnovateSphere",
+    src: "/buddhadeb.png",
   },
 ];
 
 export default function Page() {
 
   return (
-    <div className="w-full h-[400vh] mx-auto flex flex-col justify-start items-center   bg-black text-white">
+    <div className="w-full h-fit mx-auto flex flex-col justify-start items-center   bg-black text-white">
       {/* Logo Section */}
       <div className="flex items-center justify-start w-full mt-5 px-4 lg:px-16">
-        <div className="w-fit flex justify-center items-center gap-4">
+        <Link
+          href="/"
+          className="w-fit flex justify-center items-center gap-4"
+        >
           <Image
             width={40}
             height={40}
@@ -163,7 +151,7 @@ export default function Page() {
             className="w-10 h-10 rounded-full"
           />
           <h1 className="text-xl font-semibold">Rajis Lab</h1>
-        </div>
+        </Link>
       </div>
 
       {/* hero texts */}
@@ -206,67 +194,73 @@ export default function Page() {
       </div>
 
       {/* sticky scrolls */}
-      <div className="mt-[5rem] w-full h-fit">
+      <div className="mt-[5rem] w-full h-fit flex flex-col justify-center items-center px-4 lg:px-16">
+        <h1 className="text-3xl font-semibold mb-10">Explore Features</h1>
         <StickyScroll content={content} />
       </div>
 
       {/* how to contact */}
-      <div className="w-full h-full flex flex-wrap justify-center gap-32 mt-20 px-4 lg:px-16">
-        <CardSpotlight className="h-96 w-96">
-          <p className="text-xl font-bold relative z-20 mt-2 text-white">
-            Authentication steps
-          </p>
-          <div className="text-neutral-200 mt-4 relative z-20">
-            Follow these steps to secure your account:
-            <ul className="list-none  mt-2">
-              <Step title="Enter your email address" />
-              <Step title="Create a strong password" />
-              <Step title="Set up two-factor authentication" />
-              <Step title="Verify your identity" />
-            </ul>
-          </div>
-          <p className="text-neutral-300 mt-4 relative z-20 text-sm">
-            Ensuring your account is properly secured helps protect your personal
-            information and data.
-          </p>
-        </CardSpotlight>
-        <CardSpotlight className="h-96 w-96">
-          <p className="text-xl font-bold relative z-20 mt-2 text-white">
-            Authentication steps
-          </p>
-          <div className="text-neutral-200 mt-4 relative z-20">
-            Follow these steps to secure your account:
-            <ul className="list-none  mt-2">
-              <Step title="Enter your email address" />
-              <Step title="Create a strong password" />
-              <Step title="Set up two-factor authentication" />
-              <Step title="Verify your identity" />
-            </ul>
-          </div>
-          <p className="text-neutral-300 mt-4 relative z-20 text-sm">
-            Ensuring your account is properly secured helps protect your personal
-            information and data.
-          </p>
-        </CardSpotlight>
-        <CardSpotlight className="h-96 w-96">
-          <p className="text-xl font-bold relative z-20 mt-2 text-white">
-            Authentication steps
-          </p>
-          <div className="text-neutral-200 mt-4 relative z-20">
-            Follow these steps to secure your account:
-            <ul className="list-none  mt-2">
-              <Step title="Enter your email address" />
-              <Step title="Create a strong password" />
-              <Step title="Set up two-factor authentication" />
-              <Step title="Verify your identity" />
-            </ul>
-          </div>
-          <p className="text-neutral-300 mt-4 relative z-20 text-sm">
-            Ensuring your account is properly secured helps protect your personal
-            information and data.
-          </p>
-        </CardSpotlight>
+      <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
+        <h1 className="text-3xl font-semibold mb-10">Lets make it Happen</h1>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
+          <WobbleCard
+            containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+            className=""
+          >
+            <div className="max-w-xs">
+              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                Gippity AI powers the entire universe
+              </h2>
+              <p className="mt-4 text-left  text-base/6 text-neutral-200">
+                With over 100,000 mothly active bot users, Gippity AI is the most
+                popular AI platform for developers.
+              </p>
+            </div>
+            <Image
+              src="/buddhadeb.png"
+              width={500}
+              height={500}
+              alt="linear demo image"
+              className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl"
+            />
+          </WobbleCard>
+          <WobbleCard containerClassName="col-span-1 min-h-[300px]">
+            <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              No shirt, no shoes, no weapons.
+            </h2>
+            <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+              If someone yells “stop!”, goes limp, or taps out, the fight is over.
+            </p>
+          </WobbleCard>
+          <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+            <div className="max-w-sm">
+              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                Signup for blazing-fast cutting-edge state of the art Gippity AI
+                wrapper today!
+              </h2>
+              <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
+                With over 100,000 mothly active bot users, Gippity AI is the most
+                popular AI platform for developers.
+              </p>
+            </div>
+            <Image
+              src="/buddhadeb.png"
+              width={500}
+              height={500}
+              alt="linear demo image"
+              className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl"
+            />
+          </WobbleCard>
+        </div>
       </div>
+
+      {/* testimonials */}
+      <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
+        <h1 className="text-3xl font-semibold mb-10">Testimonials</h1>
+        <AnimatedTestimonials testimonials={testimonials} />
+      </div>
+
+
     </div>
   );
 }
@@ -276,31 +270,3 @@ export default function Page() {
 
 
 
-const Step = ({ title }: { title: string }) => {
-  return (
-    <li className="flex gap-2 items-start">
-      <CheckIcon />
-      <p className="text-white">{title}</p>
-    </li>
-  );
-};
-
-const CheckIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-4 w-4 text-blue-500 mt-1 flex-shrink-0"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path
-        d="M12 2c-.218 0 -.432 .002 -.642 .005l-.616 .017l-.299 .013l-.579 .034l-.553 .046c-4.785 .464 -6.732 2.411 -7.196 7.196l-.046 .553l-.034 .579c-.005 .098 -.01 .198 -.013 .299l-.017 .616l-.004 .318l-.001 .324c0 .218 .002 .432 .005 .642l.017 .616l.013 .299l.034 .579l.046 .553c.464 4.785 2.411 6.732 7.196 7.196l.553 .046l.579 .034c.098 .005 .198 .01 .299 .013l.616 .017l.642 .005l.642 -.005l.616 -.017l.299 -.013l.579 -.034l.553 -.046c4.785 -.464 6.732 -2.411 7.196 -7.196l.046 -.553l.034 -.579c.005 -.098 .01 -.198 .013 -.299l.017 -.616l.005 -.642l-.005 -.642l-.017 -.616l-.013 -.299l-.034 -.579l-.046 -.553c-.464 -4.785 -2.411 -6.732 -7.196 -7.196l-.553 -.046l-.579 -.034a28.058 28.058 0 0 0 -.299 -.013l-.616 -.017l-.318 -.004l-.324 -.001zm2.293 7.293a1 1 0 0 1 1.497 1.32l-.083 .094l-4 4a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 1.32 -1.497l.094 .083l1.293 1.292l3.293 -3.292z"
-        fill="currentColor"
-        strokeWidth="0"
-      />
-    </svg>
-  );
-};

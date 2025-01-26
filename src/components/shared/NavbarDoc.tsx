@@ -9,7 +9,7 @@ export default function Navbar({ className }: { className?: string }) {
    return (
       <div
          className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 flex justify-center items-center", className)}
-      > 
+      >
 
          {/* Menu Section */}
          <Menu setActive={setActive}>
@@ -21,11 +21,14 @@ export default function Navbar({ className }: { className?: string }) {
             </MenuItem>
 
             {/* Products */}
-            <MenuItem setActive={setActive} active={active} item="Products">
+            <MenuItem
+               setActive={setActive}
+               active={active}
+               item="Products">
                <div className="text-sm grid grid-cols-2 gap-10 p-4">
                   <ProductItem
                      title="Demo Product 1"
-                     href="#"
+                     href="/products"
                      src="/buddhadeb.png"
                      description="Description for Demo Product 1."
                   />
