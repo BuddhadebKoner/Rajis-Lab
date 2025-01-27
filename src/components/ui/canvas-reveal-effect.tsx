@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -119,7 +119,7 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
 
 const Shader: React.FC<{
   source: string;
-  uniforms: Record<string, any>;
+  uniforms: Record<string, THREE.IUniform>;
 }> = ({ source, uniforms }) => {
   const ref = useRef<THREE.Mesh>(null);
   const { size } = useThree();

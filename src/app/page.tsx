@@ -129,7 +129,7 @@ const testimonials = [
       "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
     name: "Michael Rodriguez",
     designation: "CTO at InnovateSphere",
-    src: "/buddhadeb.png",
+    src: "/RajisLabIcon.jpeg",
   },
 ];
 
