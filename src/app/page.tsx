@@ -136,7 +136,7 @@ const testimonials = [
 export default function Page() {
 
   return (
-    <div className="w-full h-fit mx-auto flex flex-col justify-start items-center   bg-black text-white">
+    <div className="w-full h-fit mx-auto flex flex-col justify-start items-center   bg-transparent text-white">
       {/* Logo Section */}
       <div className="flex items-center justify-start w-full mt-5 px-4 lg:px-16">
         <Link

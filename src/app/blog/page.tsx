@@ -7,7 +7,7 @@ import { TracingBeam } from "@/components/ui/tracing-beam";
 export default function Page() {
    return (
       <>
-         <div className="w-full h-fit flex items-center justify-center bg-black text-white pt-[7rem]">
+         <div className="w-full h-fit flex items-center justify-center bg-transparent text-white pt-[7rem]">
             <TracingBeam className="px-6">
                <div className="max-w-2xl mx-auto antialiased pt-4 relative">
                   {dummyContent.map((item, index) => (

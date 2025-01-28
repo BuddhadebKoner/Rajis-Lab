@@ -10,10 +10,7 @@ const transition = {
   mass: 0.5,
   damping: 11.5,
   stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
 };
-
 export const MenuItem = ({
   setActive,
   active,
@@ -71,7 +68,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-10 px-8 py-5"
+      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-lg flex justify-center space-x-6 px-6 py-4 text-sm sm:space-x-10 sm:px-8 sm:py-5"
     >
       {children}
     </nav>
@@ -113,7 +110,7 @@ export const ProductItem = ({
 export const HoveredLink = ({
   children,
   ...rest
-}: LinkProps & { children: React.ReactNode }) => { 
+}: LinkProps & { children: React.ReactNode }) => {
   return (
     <Link
       {...rest}

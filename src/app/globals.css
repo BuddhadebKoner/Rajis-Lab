@@ -3,7 +3,77 @@
 @tailwind utilities;
 
 body {
+  width: 100%;
+  min-height: 100vh;
+  height: fit-content;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+  color: white;
+  position: relative;
+  /* Ensures no scrollbars from circles */
+}
+
+/* Circle 1 - Top Left (Blue) */
+body::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 128, 255, 0.3), rgba(0, 128, 255, 0));
+  border-radius: 50%;
+  filter: blur(100px);
+  top: 5%;
+  /* Adjusted for responsive positioning */
+  left: 5%;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* Circle 2 - Top Right (Pink) */
+body::after {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 0, 150, 0.3), rgba(255, 0, 150, 0));
+  border-radius: 50%;
+  filter: blur(100px);
+  top: 15%;
+  right: 10%;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* Circle 3 - Bottom Left (Green) */
+body::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 255, 128, 0.3), rgba(0, 255, 128, 0));
+  border-radius: 50%;
+  filter: blur(80px);
+  bottom: 10%;
+  /* Adjusted for responsive height */
+  left: 5%;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+/* Circle 4 - Bottom Right (Orange) */
+body::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 165, 0, 0.3), rgba(255, 165, 0, 0));
+  border-radius: 50%;
+  filter: blur(100px);
+  bottom: 5%;
+  /* Adjusted for responsive height */
+  right: 10%;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 @layer base {
@@ -34,6 +104,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -66,6 +137,7 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
