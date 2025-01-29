@@ -8,7 +8,7 @@ import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import Image from "next/image";
 import { WobbleCard } from "@/components/ui/wobble-card";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
-import Link from "next/link";
+import Logo from "@/components/shared/Logo";
 
 const content = [
   {
@@ -138,21 +138,7 @@ export default function Page() {
   return (
     <div className="w-full h-fit mx-auto flex flex-col justify-start items-center   bg-transparent text-white">
       {/* Logo Section */}
-      <div className="flex items-center justify-start w-full mt-5 px-4 lg:px-16">
-        <Link
-          href="/"
-          className="w-fit flex justify-center items-center gap-4"
-        >
-          <Image
-            width={40}
-            height={40}
-            src="/RajisLabIcon.jpeg"
-            alt="Website Logo"
-            className="w-10 h-10 rounded-full"
-          />
-          <h1 className="text-xl font-semibold">Rajis Lab</h1>
-        </Link>
-      </div>
+      <Logo />
 
       {/* hero texts */}
       <div className="w-full mt-[13rem] flex flex-col justify-center items-center">
