@@ -5,43 +5,88 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/components/shared/Logo";
 import BlogSidebarCard from "@/components/shared/BlogSidebarCard";
+import Link from "next/link";
 
 
 const blogs = [
    {
-      slug: "learn-git-in-hindi",
-      title: "Learn Git in Hindi for Free",
+      slug: "mastering-mern-stack",
+      title: "Mastering MERN Stack Development – A Complete Roadmap",
       author: "Buddhadeb Koner",
       avatar: "/buddhadeb.png",
       imageUrl: "/exampleImage.jpeg",
-      content: "This is a long video tutorial about Git and Github in Hindi created by Chai aur Code. It covers basic and advanced Git commands like `git add`, `git commit`, and explains GitHub as a platform.",
-      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
-      readTime: "8 min read",
-      date: "Jan 31, 2025",
+      content: [
+         {
+            type: "text",
+            value: "MERN Stack (MongoDB, Express.js, React, Node.js) is a popular choice for full-stack web development. In this guide, we'll cover each component and how they interact."
+         },
+         {
+            type: "text",
+            value: "MongoDB is a NoSQL database that stores data in JSON-like format. It is scalable and flexible, making it ideal for modern applications."
+         },
+         {
+            type: "code",
+            value: "const mongoose = require('mongoose'); \n mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useUnifiedTopology: true });"
+         },
+         {
+            type: "text",
+            value: "Express.js is a minimal and flexible Node.js framework that helps in building APIs efficiently. It simplifies routing and middleware handling."
+         },
+         {
+            type: "code",
+            value: "const express = require('express'); \n const app = express(); \n app.get('/', (req, res) => res.send('Hello World')); \n app.listen(3000, () => console.log('Server running on port 3000'));"
+         },
+         {
+            type: "text",
+            value: "React is a JavaScript library for building user interfaces. It allows component-based development and makes UI updates efficient using the virtual DOM."
+         },
+         {
+            type: "code",
+            value: "import React from 'react'; \n function App() { \n return <h1>Hello, MERN Stack!</h1>; \n } \n export default App;"
+         }
+      ],
+      videoLink: "https://youtu.be/Vi9bxu-M-ag?si=mnqtIFuQBMowcy6r",
+      readTime: "12 min read",
+      date: "March 1, 2025",
    },
    {
-      slug: "nextjs-beginners-guide",
-      title: "Next.js Guide for Beginners",
-      author: "John Doe",
+      slug: "secure-authentication-node",
+      title: "Secure Authentication in Node.js with JWT",
+      author: "Buddhadeb Koner",
       avatar: "/buddhadeb.png",
       imageUrl: "/exampleImage.jpeg",
-      content: "A complete guide to Next.js for beginners, covering routing, data fetching, and SSR vs CSR concepts.",
-      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
-      readTime: "6 min read",
-      date: "Feb 10, 2025",
-   },
-   {
-      slug: "react-performance-optimization",
-      title: "Optimizing Performance in React",
-      author: "Alice Smith",
-      avatar: "/buddhadeb.png",
-      imageUrl: "/exampleImage.jpeg",
-      content: "Learn techniques like memoization, lazy loading, and code splitting to improve React app performance.",
-      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
-      readTime: "10 min read",
+      content: [
+         {
+            type: "text",
+            value: "Authentication is a critical part of any web application. JSON Web Tokens (JWT) provide a secure way to manage authentication in Node.js applications."
+         },
+         {
+            type: "text",
+            value: "JWT consists of three parts: Header, Payload, and Signature. It is used to securely transmit information between parties as a JSON object."
+         },
+         {
+            type: "code",
+            value: "const jwt = require('jsonwebtoken'); \n const token = jwt.sign({ userId: '12345' }, 'secretkey', { expiresIn: '1h' }); \n console.log(token);"
+         },
+         {
+            type: "text",
+            value: "To verify a JWT, the server checks if the token is valid using the secret key."
+         },
+         {
+            type: "code",
+            value: "jwt.verify(token, 'secretkey', (err, decoded) => { \n if (err) return res.status(401).json({ message: 'Unauthorized' }); \n console.log(decoded); \n });"
+         },
+         {
+            type: "text",
+            value: "For enhanced security, always store tokens securely, use HTTPS, and implement proper token expiration and refresh strategies."
+         }
+      ],
+      videoLink: "https://youtu.be/xrj3zzaqODw?si=1DMMdp2RvzlLyWBs",
+      readTime: "9 min read",
       date: "March 5, 2025",
    }
 ];
+
 
 
 
@@ -54,9 +99,17 @@ export default function BlogDetailPage() {
    return (
       <>
          <Logo />
-         <div className="w-full min-h-screen bg-transparent text-white pt-10 px-6 md:px-20">
+         <div className="min-h-screen bg-transparent text-white lg:py-10 py-20 px-6 md:px-20 ">
             {/* Hero Section */}
             <section className="max-w-4xl mx-auto">
+               <p className="text-gray-400 text-base py-5">
+                  <Link href={`/blog`} className="text-blue-400 underline">
+                     BLOGS
+                  </Link>{' '}/ {' '}
+                  <span>
+                     {blog.title.length > 25 ? `${blog.title.slice(0, 20)}...` : blog.title}
+                  </span>
+               </p>
                <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
                   <Image src={blog.imageUrl} alt={blog.title} layout="fill" objectFit="cover" />
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -68,9 +121,9 @@ export default function BlogDetailPage() {
             </section>
 
             {/* Blog Content */}
-            <div className="flex flex-col md:flex-row gap-10 max-w-4xl mx-auto mt-10">
+            <div className="max-w-4xl mx-auto mt-10 flex flex-col md:flex-row gap-10">
                {/* Main Content */}
-               <article className="flex-1">
+               <article className="flex-1 min-w-0">
                   {/* Author Section */}
                   <div className="flex items-center space-x-4 mb-6">
                      <Image src={blog.avatar} alt={blog.author} width={50} height={50} className="rounded-full" />
@@ -80,9 +133,18 @@ export default function BlogDetailPage() {
                      </div>
                   </div>
 
-                  {/* Blog Text */}
-                  <div className="text-gray-400 text-lg leading-relaxed">
-                     <p>{blog.content}</p>
+                  {/* Blog Text - Handling Different Content Types */}
+                  <div className="text-gray-400 text-lg leading-relaxed space-y-4">
+                     {blog.content.map((block, index) => (
+                        <div key={index}>
+                           {block.type === "text" && <p>{block.value}</p>}
+                           {block.type === "code" && (
+                              <pre className="bg-gray-800 p-4 rounded-lg overflow-x-auto">
+                                 <code className="whitespace-pre-wrap break-words">{block.value}</code>
+                              </pre>
+                           )}
+                        </div>
+                     ))}
                   </div>
 
                   {/* Video section if present */}
@@ -100,13 +162,15 @@ export default function BlogDetailPage() {
                         </div>
                      </div>
                   )}
-
                </article>
 
                {/* Sidebar */}
-               <BlogSidebarCard blog={blog} />
+               <div className="w-full md:w-64 flex-shrink-0">
+                  <BlogSidebarCard blog={blog} />
+               </div>
             </div>
          </div>
+
       </>
    );
 }

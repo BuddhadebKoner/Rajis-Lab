@@ -134,3 +134,21 @@ body::after {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+/* Webkit-based browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Edge and Internet Explorer */
+body {
+  -ms-overflow-style: none;
+  /* Hide scrollbar in IE */
+}

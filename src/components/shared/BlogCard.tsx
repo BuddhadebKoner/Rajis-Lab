@@ -20,7 +20,6 @@ export default function Blogard({
    slug: string;
 }) {
 
-   const withoutSpaceTitle = title.replace(/\s+/g, "-").toLowerCase();
    const scrinkContent = content.slice(0, 200);
 
    return (
