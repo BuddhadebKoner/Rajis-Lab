@@ -9,112 +9,116 @@ import Image from "next/image";
 import { WobbleCard } from "@/components/ui/wobble-card";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import Logo from "@/components/shared/Logo";
+import Link from "next/link";
 
 const content = [
   {
-    title: "Collaborative Editing",
+    title: "Innovation",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "At Raji's Lab, we are committed to continuous innovation. Our cutting-edge tools are designed to empower businesses, simplify complex workflows, and push the boundaries of what's possible, fostering growth and success across industries.",
     content: (
       <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
         <Image
-          src="/RajisLabIcon.jpeg"
+          src="/images/innovation_in_softwares.jpeg"
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo"
+          alt="Innovation at Raji's Lab"
         />
       </div>
     ),
   },
   {
-    title: "Real time changes",
+    title: "Efficiency",
     description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "Boost your business efficiency with Raji's Lab’s advanced solutions. Our platform streamlines workflows, automates tedious tasks, and helps you optimize resources, enabling you to achieve maximum productivity and scale effortlessly.",
     content: (
       <div className="h-full w-full  flex items-center justify-center text-white">
         <Image
-          src="/buddhadeb.png"
+          src="/images/work_efficiency.jpeg"
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo"
+          alt="Efficiency with Raji's Lab"
         />
       </div>
     ),
   },
   {
-    title: "Version control",
+    title: "Security",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Raji's Lab takes data security seriously. We implement industry-leading security measures to protect your business data and ensure that your operations remain safe and secure from potential cyber threats and vulnerabilities.",
     content: (
       <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
         <Image
-          src="/RajisLabIcon.jpeg"
+          src="/images/security_your_information.jpeg"
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo"
+          alt="Security at Raji's Lab"
         />
       </div>
     ),
   },
   {
-    title: "Running out of content",
+    title: "Support",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Raji's Lab offers comprehensive support to ensure smooth operation of our services. Whether you're facing setup issues or need troubleshooting assistance, our expert support team is available to resolve any concerns promptly.",
     content: (
       <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
         <Image
-          src="/buddhadeb.png"
+          src="/images/customer_support.jpeg"
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo"
+          alt="Support at Raji's Lab"
         />
       </div>
     ),
   },
 ];
 
+
+
 const projects = [
   {
-    title: "Stripe",
+    title: "Raji's Lab",
     description:
-      "A technology company that builds economic infrastructure for the internet.",
-    link: "https://stripe.com",
+      "A SaaS platform offering tailored solutions for businesses, streamlining operations and driving growth.",
+    link: "http://localhost:30010/",
   },
   {
-    title: "Netflix",
+    title: "Attender",
     description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
-    link: "https://netflix.com",
+      "Manage attendance effortlessly with QR code scanning, designed for events, meetings, and workplaces.",
+    link: "http://localhost:30030/",
   },
   {
-    title: "Google",
+    title: "Dashboard",
     description:
-      "A multinational technology company that specializes in Internet-related services and products.",
-    link: "https://google.com",
+      "Gain valuable insights through real-time analytics and performance tracking in a centralized dashboard.",
+    link: "http://localhost:30040/",
   },
   {
-    title: "Meta",
+    title: "Integration",
     description:
-      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
-    link: "https://meta.com",
+      "Seamlessly connect with multiple platforms and devices for a consistent experience across all your operations.",
+    link: "http://localhost:30050/",
   },
   {
-    title: "Amazon",
+    title: "Notifications",
     description:
-      "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
-    link: "https://amazon.com",
+      "Stay updated with instant notifications for important changes and activities across your account.",
+    link: "http://localhost:30090/",
   },
   {
-    title: "Microsoft",
+    title: "Payments",
     description:
-      "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
-    link: "https://microsoft.com",
+      "Secure, encrypted payment gateway for smooth and reliable transactions without the hassle.",
+    link: "http://localhost:30070/",
   },
 ];
+
 
 const testimonials = [
   {
@@ -122,14 +126,14 @@ const testimonials = [
       "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
     name: "Sarah Chen",
     designation: "Product Manager at TechFlow",
-    src: "/buddhadeb.png",
+    src: "/images/testimonial1.jpeg",
   },
   {
     quote:
       "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
     name: "Michael Rodriguez",
     designation: "CTO at InnovateSphere",
-    src: "/RajisLabIcon.jpeg",
+    src: "/images/testimonial2.jpeg",
   },
 ];
 
@@ -168,10 +172,12 @@ export default function Page() {
 
       {/* hero button */}
       <div className="w-full h-fit flex flex-col justify-center items-center mt-20">
-        <button className="px-10 py-2 bg-gradient-to-r bg-white text-black text-xl font-semibold rounded-lg">
+        <Link
+          href={"/products"}
+          className="px-10 py-2 bg-gradient-to-r bg-white text-black text-xl font-semibold rounded-lg">
           Try Our Products
-        </button>
-        <p>Trusted by 2000+</p>
+        </Link>
+        <p>Trusted by 3500+</p>
       </div>
 
       {/* cards */}
@@ -187,7 +193,7 @@ export default function Page() {
 
       {/* how to contact */}
       <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
-        <h1 className="text-3xl font-semibold mb-10">Lets make it Happen</h1>
+        <h1 className="text-3xl font-semibold mb-10">Let's Make it Happen with Raji's Lab</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
           <WobbleCard
             containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
@@ -195,50 +201,48 @@ export default function Page() {
           >
             <div className="max-w-xs">
               <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                Gippity AI powers the entire universe
+                Empower Your Business with Innovation
               </h2>
-              <p className="mt-4 text-left  text-base/6 text-neutral-200">
-                With over 100,000 mothly active bot users, Gippity AI is the most
-                popular AI platform for developers.
+              <p className="mt-4 text-left text-base/6 text-neutral-200">
+                Drive your business forward with Raji's Lab. Our innovative solutions simplify complex processes, ensuring your operations are future-proof and streamlined for growth.
               </p>
             </div>
             <Image
-              src="/buddhadeb.png"
+              src="/images/testimonial2.jpeg"
               width={500}
               height={500}
-              alt="linear demo image"
+              alt="Innovation at Raji's Lab"
               className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl"
             />
           </WobbleCard>
           <WobbleCard containerClassName="col-span-1 min-h-[300px]">
-            <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-              No shirt, no shoes, no weapons.
+            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              Efficiency That Drives Results
             </h2>
-            <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-              If someone yells “stop!”, goes limp, or taps out, the fight is over.
+            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+              Maximize your business potential with Raji's Lab's efficient tools. Our solutions help you streamline tasks, increase productivity, and focus on what truly matters—growth.
             </p>
           </WobbleCard>
           <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
             <div className="max-w-sm">
-              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                Signup for blazing-fast cutting-edge state of the art Gippity AI
-                wrapper today!
+              <h2 className="max-w-sm md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+                Secure and Reliable for Your Business
               </h2>
-              <p className="mt-4 max-w-[26rem] text-left  text-base/6 text-neutral-200">
-                With over 100,000 mothly active bot users, Gippity AI is the most
-                popular AI platform for developers.
+              <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+                Raji's Lab prioritizes security, ensuring your business data is protected with advanced security measures. Trust us to keep your operations safe from cyber threats, so you can focus on growth.
               </p>
             </div>
             <Image
-              src="/buddhadeb.png"
+              src="/images/testimonial2.jpeg"
               width={500}
               height={500}
-              alt="linear demo image"
+              alt="Security at Raji's Lab"
               className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl"
             />
           </WobbleCard>
         </div>
       </div>
+
 
       {/* testimonials */}
       <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">

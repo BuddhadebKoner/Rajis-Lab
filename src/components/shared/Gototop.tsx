@@ -7,10 +7,10 @@ const GoToTopButton = () => {
 
    // Check scroll position
    const checkScrollPosition = () => {
-      if (window.scrollY > window.innerHeight) {
-         setIsVisible(true); // Show button when scrolled down
+      if (window.scrollY > 100) {
+         setIsVisible(true); 
       } else {
-         setIsVisible(false); // Hide button when at top
+         setIsVisible(false); 
       }
    };
 
@@ -46,7 +46,7 @@ const GoToTopButton = () => {
                className="w-6 h-6"
             >
                <path
-                  strokeLinecap="round"  // Corrected the camelCase here
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M19 9l-7-7-7 7"

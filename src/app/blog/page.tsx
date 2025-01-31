@@ -1,114 +1,66 @@
 "use client";
+
 import React from "react";
-import Image from "next/image";
-import { twMerge } from "tailwind-merge";
-import { TracingBeam } from "@/components/ui/tracing-beam";
 import Logo from "@/components/shared/Logo";
+import Blogard from "@/components/shared/BlogCard";
+
+const blogs = [
+   {
+      slug: "learn-git-in-hindi",
+      title: "Learn Git in Hindi for Free",
+      author: "Buddhadeb Koner",
+      avatar: "/buddhadeb.png",
+      imageUrl: "/exampleImage.jpeg",
+      content: "This is a long video tutorial about Git and Github in Hindi created by Chai aur Code. It covers basic and advanced Git commands like `git add`, `git commit`, and explains GitHub as a platform.",
+      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
+      readTime: "8 min read",
+      date: "Jan 31, 2025",
+   },
+   {
+      slug: "nextjs-beginners-guide",
+      title: "Next.js Guide for Beginners",
+      author: "John Doe",
+      avatar: "/buddhadeb.png",
+      imageUrl: "/exampleImage.jpeg",
+      content: "A complete guide to Next.js for beginners, covering routing, data fetching, and SSR vs CSR concepts.",
+      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
+      readTime: "6 min read",
+      date: "Feb 10, 2025",
+   },
+   {
+      slug: "react-performance-optimization",
+      title: "Optimizing Performance in React",
+      author: "Alice Smith",
+      avatar: "/buddhadeb.png",
+      imageUrl: "/exampleImage.jpeg",
+      content: "Learn techniques like memoization, lazy loading, and code splitting to improve React app performance.",
+      videoLink: "https://youtu.be/3cR1KqyFp6I?si=vVzXOFymSUvi_LH4",
+      readTime: "10 min read",
+      date: "March 5, 2025",
+   }
+];
+
 
 export default function Page() {
    return (
       <>
-         <Logo />
-         <div className="w-full h-fit bg-transparent text-white pt-10">
-            <TracingBeam className="px-6">
-               <div className="max-w-2xl mx-auto antialiased pt-4 relative">
-                  {dummyContent.map((item, index) => (
-                     <div key={`content-${index}`} className="mb-10">
-                        <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-                           {item.badge}
-                        </h2>
-
-                        <p className={twMerge("text-xl mb-4")}>
-                           {item.title}
-                        </p>
-
-                        <div className="text-sm  prose prose-sm dark:prose-invert">
-                           {item?.image && (
-                              <Image
-                                 src={item.image}
-                                 alt="blog thumbnail"
-                                 height="1000"
-                                 width="1000"
-                                 className="rounded-lg mb-10 object-cover"
-                              />
-                           )}
-                           {item.description}
-                        </div>
-                     </div>
-                  ))}
-               </div>
-            </TracingBeam>
+         <div className="w-full min-h-screen">
+            <Logo />
+            <div className="w-full bg-transparent text-white pt-10 flex flex-wrap justify-center items-center gap-10">
+               {blogs.map((blog) => (
+                  <Blogard
+                     key={blog.slug}
+                     title={blog.title}
+                     author={blog.author}
+                     timeToRead={blog.readTime}
+                     content={blog.content.substring(0, 100) + "..."}
+                     imageUrl={blog.imageUrl}
+                     avatar={blog.avatar}
+                     slug={blog.slug}
+                  />
+               ))}
+            </div>
          </div>
       </>
    );
 }
-
-
-const dummyContent = [
-   {
-      title: "Lorem Ipsum Dolor Sit Amet",
-      description: (
-         <>
-            <p>
-               Sit duis est minim proident non nisi velit non consectetur. Esse
-               adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt
-               Lorem ut aliqua anim do. Duis cupidatat qui irure cupidatat incididunt
-               incididunt enim magna id est qui sunt fugiat. Laboris do duis pariatur
-               fugiat Lorem aute sit ullamco. Qui deserunt non reprehenderit dolore
-               nisi velit exercitation Lorem qui do enim culpa. Aliqua eiusmod in
-               occaecat reprehenderit laborum nostrud fugiat voluptate do Lorem culpa
-               officia sint labore. Tempor consectetur excepteur ut fugiat veniam
-               commodo et labore dolore commodo pariatur.
-            </p>
-         </>
-      ),
-      badge: "React",
-      image:
-         "/exampleImage.jpeg",
-   },
-   {
-      title: "Lorem Ipsum Dolor Sit Amet",
-      description: (
-         <>
-            <p>
-               Ex irure dolore veniam ex velit non aute nisi labore ipsum occaecat
-               deserunt cupidatat aute. Enim cillum dolor et nulla sunt exercitation
-               non voluptate qui aliquip esse tempor. Ullamco ut sunt consectetur
-               sint qui qui do do qui do. Labore laborum culpa magna reprehenderit ea
-               velit id esse adipisicing deserunt amet dolore. Ipsum occaecat veniam
-               commodo proident aliqua id ad deserunt dolor aliquip duis veniam sunt.
-            </p>
-            <p>
-               In dolore veniam excepteur eu est et sunt velit. Ipsum sint esse
-               veniam fugiat esse qui sint ad sunt reprehenderit do qui proident
-               reprehenderit. Laborum exercitation aliqua reprehenderit ea sint
-               cillum ut mollit.
-            </p>
-         </>
-      ),
-      badge: "Changelog",
-      image:
-         "/exampleImage.jpeg",
-   },
-   {
-      title: "Lorem Ipsum Dolor Sit Amet",
-      description: (
-         <>
-            <p>
-               Sit duis est minim proident non nisi velit non consectetur. Esse
-               adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt
-               Lorem ut aliqua anim do. Duis cupidatat qui irure cupidatat incididunt
-               incididunt enim magna id est qui sunt fugiat. Laboris do duis pariatur
-               fugiat Lorem aute sit ullamco. Qui deserunt non reprehenderit dolore
-               nisi velit exercitation Lorem qui do enim culpa. Aliqua eiusmod in
-               occaecat reprehenderit laborum nostrud fugiat voluptate do Lorem culpa
-               officia sint labore. Tempor consectetur excepteur ut fugiat veniam
-               commodo et labore dolore commodo pariatur.
-            </p>
-         </>
-      ),
-      badge: "Launch Week",
-      image:
-         "/exampleImage.jpeg",
-   },
-];

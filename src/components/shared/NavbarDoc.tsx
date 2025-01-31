@@ -17,11 +17,12 @@ export default function Navbar({ className }: { className?: string }) {
          {/* Menu Section */}
          <Menu setActive={setActive}>
             {/* Home */}
-            <MenuItem setActive={setActive} active={active} item="Home">
-               <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/">Go to Homepage</HoveredLink>
-               </div>
-            </MenuItem>
+            <Link
+               href={"/"}
+               className="text-sm  text-black"
+            >
+               Home
+            </Link>
 
             {/* Products */}
             <MenuItem setActive={setActive} active={active} item="Products">
@@ -53,20 +54,20 @@ export default function Navbar({ className }: { className?: string }) {
             </MenuItem>
 
             {/* About */}
-            <MenuItem setActive={setActive} active={active} item="About">
-               <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/about-us">About the Team</HoveredLink>
-                  <HoveredLink href="/mission">Our Mission</HoveredLink>
-               </div>
-            </MenuItem>
+            <Link
+               href={"/about-us"}
+               className="text-sm  text-black"
+            >
+               About
+            </Link>
 
             {/* Blogs */}
-            <MenuItem setActive={setActive} active={active} item="Blogs">
-               <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/blog">Latest Blogs</HoveredLink>
-                  <HoveredLink href="/categories">Blog Categories</HoveredLink>
-               </div>
-            </MenuItem>
+            <Link
+               href={"/blog"}
+               className="text-sm  text-black"
+            >
+               Blogs
+            </Link>
          </Menu>
       </div>
    );
