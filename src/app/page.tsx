@@ -3,13 +3,15 @@ import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import { motion } from "framer-motion";
 import React from "react";
 
-import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import Image from "next/image";
-import { WobbleCard } from "@/components/ui/wobble-card";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import Logo from "@/components/shared/Logo";
 import Link from "next/link";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { IconAdjustmentsBolt, IconCloud, IconCurrencyDollar, IconEaseInOut, IconHeart, IconHelp, IconRouteAltLeft, IconTerminal2 } from "@tabler/icons-react";
+import { cn } from "@/lib/utils";
+import Feature from "@/components/shared/Feature";
 
 const content = [
   {
@@ -77,49 +79,6 @@ const content = [
     ),
   },
 ];
-
-
-
-const projects = [
-  {
-    title: "Raji's Lab",
-    description:
-      "A SaaS platform offering tailored solutions for businesses, streamlining operations and driving growth.",
-    link: "http://localhost:30010/",
-  },
-  {
-    title: "Attender",
-    description:
-      "Manage attendance effortlessly with QR code scanning, designed for events, meetings, and workplaces.",
-    link: "http://localhost:30030/",
-  },
-  {
-    title: "Dashboard",
-    description:
-      "Gain valuable insights through real-time analytics and performance tracking in a centralized dashboard.",
-    link: "http://localhost:30040/",
-  },
-  {
-    title: "Integration",
-    description:
-      "Seamlessly connect with multiple platforms and devices for a consistent experience across all your operations.",
-    link: "http://localhost:30050/",
-  },
-  {
-    title: "Notifications",
-    description:
-      "Stay updated with instant notifications for important changes and activities across your account.",
-    link: "http://localhost:30090/",
-  },
-  {
-    title: "Payments",
-    description:
-      "Secure, encrypted payment gateway for smooth and reliable transactions without the hassle.",
-    link: "http://localhost:30070/",
-  },
-];
-
-
 const testimonials = [
   {
     quote:
@@ -137,15 +96,63 @@ const testimonials = [
   },
 ];
 
+const features = [
+  {
+    title: "Built for developers",
+    description:
+      "Built for engineers, developers, dreamers, thinkers and doers.",
+    icon: <IconTerminal2 />,
+  },
+  {
+    title: "Ease of use",
+    description:
+      "It's as easy as using an Apple, and as expensive as buying one.",
+    icon: <IconEaseInOut />,
+  },
+  {
+    title: "Pricing like no other",
+    description:
+      "Our prices are best in the market. No cap, no lock, no credit card required.",
+    icon: <IconCurrencyDollar />,
+  },
+  {
+    title: "100% Uptime guarantee",
+    description: "We just cannot be taken down by anyone.",
+    icon: <IconCloud />,
+  },
+  {
+    title: "Multi-tenant Architecture",
+    description: "You can simply share passwords instead of buying new seats",
+    icon: <IconRouteAltLeft />,
+  },
+  {
+    title: "24/7 Customer Support",
+    description:
+      "We are available a 100% of the time. Atleast our AI Agents are.",
+    icon: <IconHelp />,
+  },
+  {
+    title: "Money back guarantee",
+    description:
+      "If you donot like EveryAI, we will convince you to like us.",
+    icon: <IconAdjustmentsBolt />,
+  },
+  {
+    title: "And everything else",
+    description: "I just ran out of copy ideas. Accept my sincere apologies",
+    icon: <IconHeart />,
+  },
+];
+
 export default function Page() {
 
   return (
-    <div className="w-full h-fit mx-auto flex flex-col justify-start items-center   bg-transparent text-white">
+    <div className="w-screen min-h-screen mx-auto flex flex-col justify-start items-center bg-transparent text-white">
       {/* Logo Section */}
       <Logo />
 
       {/* hero texts */}
-      <div className="w-full mt-[13rem] flex flex-col justify-center items-center">
+      <div className="w-screen mt-[13rem] flex flex-col justify-center items-center">
         <HeroHighlight>
           <motion.h1
             initial={{
@@ -162,16 +169,16 @@ export default function Page() {
             }}
             className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold  max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
           >
-            Speed Up Your Attendance with{" "}
+            Welcome to Raji's Lab:{" "}
             <Highlight className="text-white">
-              QR Codes & Custom Barcodes
+              Innovating Daily Life with Technology
             </Highlight>
           </motion.h1>
         </HeroHighlight>
       </div>
 
       {/* hero button */}
-      <div className="w-full h-fit flex flex-col justify-center items-center mt-20">
+      <div className="w-screen h-fit flex flex-col justify-center items-center mt-20">
         <Link
           href={"/products"}
           className="px-10 py-2 bg-gradient-to-r bg-white text-black text-xl font-semibold rounded-lg">
@@ -180,72 +187,25 @@ export default function Page() {
         <p>Trusted by 3500+</p>
       </div>
 
-      {/* cards */}
-      <div className="max-w-5xl mx-auto px-8 mt-28">
-        <HoverEffect items={projects} />
-      </div>
-
       {/* sticky scrolls */}
-      <div className="mt-[5rem] w-full h-fit flex flex-col justify-center items-center px-4 lg:px-16">
-        <h1 className="text-3xl font-semibold mb-10">Explore Features</h1>
+      <div className="mt-[5rem] w-screen h-fit flex flex-col justify-center items-center px-4 lg:px-16">
+        <h1 className="text-3xl font-semibold mb-10">How we serve best products</h1>
         <StickyScroll content={content} />
       </div>
 
       {/* how to contact */}
-      <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
+      <div className="w-screen h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
         <h1 className="text-3xl font-semibold mb-10">Let's Make it Happen with Raji's Lab</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
-          <WobbleCard
-            containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
-            className=""
-          >
-            <div className="max-w-xs">
-              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                Empower Your Business with Innovation
-              </h2>
-              <p className="mt-4 text-left text-base/6 text-neutral-200">
-                Drive your business forward with Raji's Lab. Our innovative solutions simplify complex processes, ensuring your operations are future-proof and streamlined for growth.
-              </p>
-            </div>
-            <Image
-              src="/images/testimonial2.jpeg"
-              width={500}
-              height={500}
-              alt="Innovation at Raji's Lab"
-              className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl"
-            />
-          </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 min-h-[300px]">
-            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-              Efficiency That Drives Results
-            </h2>
-            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
-              Maximize your business potential with Raji's Lab's efficient tools. Our solutions help you streamline tasks, increase productivity, and focus on what truly matters—growth.
-            </p>
-          </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
-            <div className="max-w-sm">
-              <h2 className="max-w-sm md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                Secure and Reliable for Your Business
-              </h2>
-              <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
-                Raji's Lab prioritizes security, ensuring your business data is protected with advanced security measures. Trust us to keep your operations safe from cyber threats, so you can focus on growth.
-              </p>
-            </div>
-            <Image
-              src="/images/testimonial2.jpeg"
-              width={500}
-              height={500}
-              alt="Security at Raji's Lab"
-              className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl"
-            />
-          </WobbleCard>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
+          {features.map((feature, index) => (
+            <Feature key={feature.title} {...feature} index={index} />
+          ))}
         </div>
       </div>
 
 
       {/* testimonials */}
-      <div className="w-full h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
+      <div className="w-screen h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16 z-30">
         <h1 className="text-3xl font-semibold mb-10">Testimonials</h1>
         <AnimatedTestimonials testimonials={testimonials} />
       </div>
@@ -254,8 +214,6 @@ export default function Page() {
     </div>
   );
 }
-
-
 
 
 

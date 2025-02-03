@@ -4,8 +4,9 @@
 
 body {
   width: 100%;
-  min-height: 100vh;
-  height: fit-content;
+  min-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
   color: white;
@@ -137,18 +138,32 @@ body::after {
 
 
 
-/* Webkit-based browsers (Chrome, Edge, Safari) */
+/* For WebKit Browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
-  display: none;
+  width: 6px;
+  /* Small width */
+  height: 6px;
 }
 
-/* Firefox */
+::-webkit-scrollbar-thumb {
+  background: #333;
+  /* Dark scrollbar */
+  border-radius: 10px;
+  /* Rounded edges */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  /* Dark track */
+}
+
+/* For Firefox */
 * {
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: #333 #1a1a1a;
 }
 
-/* Edge and Internet Explorer */
-body {
-  -ms-overflow-style: none;
-  /* Hide scrollbar in IE */
+/* For Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }

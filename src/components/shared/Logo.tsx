@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Logo() {
    return (
       <>
-         <div className="items-center justify-start w-full mt-5 px-4 lg:px-16 z-10 hidden lg:flex">
+         <div className="w-screen items-center justify-start mt-5 px-4 lg:px-16 z-10 hidden lg:flex">
             <Link
                href="/"
                className="w-fit flex justify-center items-center gap-4 z-50"

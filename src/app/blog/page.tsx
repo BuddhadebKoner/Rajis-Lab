@@ -88,7 +88,7 @@ const blogs = [
 export default function Page() {
    return (
       <>
-         <div className="w-full min-h-screen lg:py-10 py-20">
+         <div className="w-full min-h-screen lg:py-0 py-20">
             <Logo />
             <h1 className="text-2xl font-semibold text-white text-start pt-10 px-4 lg:px-16">
                My Blogs

@@ -30,14 +30,25 @@ export default function Page() {
 const data = [
    {
       category: "Mobile App",
-      title: "Qr Attender",
+      title: "QR Attender",
       src: "/exampleImage.jpeg",
-      content: <DummyContent />,
+      content: <DummyContent
+         title="QR Attender"
+         content="QR Attender is a mobile application that allows users to scan QR codes to mark their attendance."
+         src="/exampleImage.jpeg"
+         category="Mobile App"
+      />,
    },
    {
       category: "Software As Service",
-      title: " Langotiya jeetu ka mara hua yaar",
+      title: "Langotiya Jeetu Ka Mara Hua Yaar",
       src: "/exampleImage.jpeg",
-      content: <DummyContent />,
+      content: <DummyContent
+         title="QR Attender"
+         content="QR Attender is a mobile application that allows users to scan QR codes to mark their attendance."
+         src="/exampleImage.jpeg"
+         category="Mobile App"
+      />,
    },
 ];
+

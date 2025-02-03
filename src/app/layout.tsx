@@ -27,21 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="relative">
-          <Navbar className="top-5" />
-        </div>
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Navbar className="top-5" />
+        <div className="w-full min-w-full overflow-hidden">{children}</div>
         <div className="relative">
           <Footer />
         </div>
-
         <GoToTopButton />
       </body>
     </html>
   );
 }
-
-
