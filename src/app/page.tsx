@@ -8,9 +8,7 @@ import Image from "next/image";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import Logo from "@/components/shared/Logo";
 import Link from "next/link";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { IconAdjustmentsBolt, IconCloud, IconCurrencyDollar, IconEaseInOut, IconHeart, IconHelp, IconRouteAltLeft, IconTerminal2 } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
 import Feature from "@/components/shared/Feature";
 
 const content = [
@@ -169,7 +167,7 @@ export default function Page() {
             }}
             className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold  max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
           >
-            Welcome to Raji's Lab:{" "}
+            Welcome to Raji&apos;s Lab:{" "}
             <Highlight className="text-white">
               Innovating Daily Life with Technology
             </Highlight>
@@ -195,7 +193,7 @@ export default function Page() {
 
       {/* how to contact */}
       <div className="w-screen h-fit mt-[10rem] flex flex-col justify-center items-center px-4 lg:px-16">
-        <h1 className="text-3xl font-semibold mb-10">Let's Make it Happen with Raji's Lab</h1>
+        <h1 className="text-3xl font-semibold mb-10">Let&apos;s Make it Happen with Raji&apos;s Lab</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <Feature key={feature.title} {...feature} index={index} />

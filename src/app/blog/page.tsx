@@ -83,8 +83,6 @@ const blogs = [
    }
 ];
 
-
-
 export default function Page() {
    return (
       <>

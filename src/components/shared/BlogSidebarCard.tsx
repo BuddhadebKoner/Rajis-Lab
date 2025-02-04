@@ -4,7 +4,12 @@ import Image from "next/image";
 import { FaFacebook, FaLinkedin, FaTwitter, FaTelegram, FaBookmark } from "react-icons/fa";
 
 
-export default function BlogSidebarCard({ blog }: any) {
+export default function BlogSidebarCard({ blog }: {
+   blog: {
+      avatar: string;
+      author: string;
+   };
+}) {
    return (
       <>
          <aside className="w-full md:w-64 bg-transparent p-6 rounded-lg">

@@ -36,7 +36,7 @@ const GoToTopButton = () => {
       isVisible && (
          <button
             onClick={scrollToTop}
-            className="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none"
+            className="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none z-50"
          >
             <svg
                xmlns="http://www.w3.org/2000/svg"
