@@ -30,30 +30,35 @@ export default function BlogDetailPage() {
    const [error, setError] = useState<string | null>(null);
    const [loading, setLoading] = useState<boolean>(true);
    const { slug } = useParams();
-   console.log("Slug:", slug);
-
 
    useEffect(() => {
       if (!slug) return;
 
-      const fetchBlog = async () => {
-         try {
-            const response = await fetch(`/api/blogs/${slug}`);
-            console.log("API Response Status:", response.status);
+      // Check if the blog is already cached in sessionStorage
+      const cachedBlog = sessionStorage.getItem(`blog_${slug}`);
+      if (cachedBlog) {
+         setBlog(JSON.parse(cachedBlog)); // Use cached blog data
+         setLoading(false); // No need to fetch data
+      } else {
+         // Fetch the blog data from the API if not cached
+         const fetchBlog = async () => {
+            try {
+               const response = await fetch(`/api/blogs/${slug}`);
+               const data = await response.json();
 
-            const data = await response.json();
+               if (!response.ok) throw new Error(data.message || "Failed to fetch blog!");
 
-            if (!response.ok) throw new Error(data.message || "Failed to fetch blog!");
+               setBlog(data.blog);
+               sessionStorage.setItem(`blog_${slug}`, JSON.stringify(data.blog)); // Cache the blog data in sessionStorage
+            } catch (error) {
+               setError(error instanceof Error ? error.message : "An unknown error occurred");
+            } finally {
+               setLoading(false);
+            }
+         };
 
-            setBlog(data.blog);
-         } catch (error) {
-            setError(error instanceof Error ? error.message : "An unknown error occurred");
-         } finally {
-            setLoading(false);
-         }
-      };
-
-      fetchBlog();
+         fetchBlog();
+      }
    }, [slug]);
 
    if (loading) {

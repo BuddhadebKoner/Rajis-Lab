@@ -22,22 +22,28 @@ export default function BlogPage() {
    const [error, setError] = useState<string | null>(null);
 
    useEffect(() => {
-      const fetchBlogs = async () => {
-         try {
-            const response = await fetch("/api/blogs/");
-            if (!response.ok) throw new Error("Failed to fetch blogs!");
+      // Check if blogs data is already in sessionStorage
+      const cachedBlogs = sessionStorage.getItem("blogs");
+      if (cachedBlogs) {
+         setBlogs(JSON.parse(cachedBlogs)); // Use cached data
+      } else {
+         // If no cached data, fetch from API
+         const fetchBlogs = async () => {
+            try {
+               const response = await fetch("/api/blogs/");
+               if (!response.ok) throw new Error("Failed to fetch blogs!");
 
-            // console.log(response);
+               const data = await response.json();
+               setBlogs(data.blogs);
+               sessionStorage.setItem("blogs", JSON.stringify(data.blogs)); // Cache the data in sessionStorage
+            } catch (error) {
+               setError(error instanceof Error ? error.message : "An unknown error occurred");
+            }
+         };
 
-            const data = await response.json();
-            setBlogs(data.blogs);
-         } catch (error) {
-            setError(error instanceof Error ? error.message : "An unknown error occurred");
-         }
-      };
-
-      fetchBlogs();
-   }, []);
+         fetchBlogs();
+      }
+   }, []); // Empty dependency array ensures it runs once when the component is mounted
 
    return (
       <div className="w-full min-h-screen lg:py-0 py-20">
