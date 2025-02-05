@@ -4,19 +4,19 @@ import Image from "next/image";
 import { FaFacebook, FaLinkedin, FaTwitter, FaTelegram, FaBookmark } from "react-icons/fa";
 
 
-export default function BlogSidebarCard({ blog }: {
-   blog: {
-      avatar: string;
-      author: string;
-   };
+export default function BlogSidebarCard({ author }: {
+   author: {
+      fullName: string;
+      profileImage: string;
+   }
 }) {
    return (
       <>
          <aside className="w-full md:w-64 bg-transparent p-6 rounded-lg">
             <h3 className="text-xl font-semibold mb-4">Author</h3>
             <div className="flex items-center space-x-3">
-               <Image src={blog.avatar} alt={blog.author} width={40} height={40} className="rounded-full" />
-               <span className="text-gray-300">{blog.author}</span>
+               <Image src={author.profileImage} alt={author.fullName} width={40} height={40} className="rounded-full" />
+               <span className="text-gray-300">{author.fullName}</span>
             </div>
 
             {/* Bookmark & Social */}

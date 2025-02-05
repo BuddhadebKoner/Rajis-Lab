@@ -94,8 +94,9 @@ const Footer: React.FC = () => {
                <div>
                   <h4 className="text-white font-semibold mb-4">Connect</h4>
                   <div className="flex flex-col space-y-2">
-                     <Link href="https://twitter.com/aceternitylabs" target="_blank" rel="noopener noreferrer" className="hover:text-white">Twitter</Link>
-                     <Link href="https://discord.gg/ftZbQvCdN7" target="_blank" rel="noopener noreferrer" className="hover:text-white">Discord</Link>
+                     <Link href="https://x.com/rajis_lab" target="_blank" rel="noopener noreferrer" className="hover:text-white">Twitter</Link>
+                     <Link href="https://www.linkedin.com/company/rajislab" target="_blank" rel="noopener noreferrer" className="hover:text-white">Linkedin</Link>
+                     <Link href="https://www.instagram.com/rajis_lab" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</Link>
                   </div>
                </div>
 
@@ -113,7 +114,7 @@ const Footer: React.FC = () => {
          {/* Bottom Section */}
          <div className="border-t border-gray-600 py-4">
             <div className="text-center text-gray-400 text-xs">
-               &copy; {new Date().getFullYear()} Rajis Lab. All rights reserved.
+               &copy; 2024- {new Date().getFullYear()} Rajis Lab. All rights reserved.
             </div>
          </div>
       </footer>

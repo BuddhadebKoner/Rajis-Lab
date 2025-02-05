@@ -1,114 +1,81 @@
 "use client";
 
-import { notFound } from "next/navigation";
-import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Logo from "@/components/shared/Logo";
 import BlogSidebarCard from "@/components/shared/BlogSidebarCard";
-import Link from "next/link";
+import { useParams } from "next/navigation";
 
-
-const blogs = [
-   {
-      slug: "mastering-mern-stack",
-      title: "Mastering MERN Stack Development – A Complete Roadmap",
-      author: "Buddhadeb Koner",
-      avatar: "/buddhadeb.png",
-      imageUrl: "/exampleImage.jpeg",
-      content: [
-         {
-            type: "text",
-            value: "MERN Stack (MongoDB, Express.js, React, Node.js) is a popular choice for full-stack web development. In this guide, we'll cover each component and how they interact."
-         },
-         {
-            type: "text",
-            value: "MongoDB is a NoSQL database that stores data in JSON-like format. It is scalable and flexible, making it ideal for modern applications."
-         },
-         {
-            type: "code",
-            value: "const mongoose = require('mongoose'); \n mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useUnifiedTopology: true });"
-         },
-         {
-            type: "text",
-            value: "Express.js is a minimal and flexible Node.js framework that helps in building APIs efficiently. It simplifies routing and middleware handling."
-         },
-         {
-            type: "code",
-            value: "const express = require('express'); \n const app = express(); \n app.get('/', (req, res) => res.send('Hello World')); \n app.listen(3000, () => console.log('Server running on port 3000'));"
-         },
-         {
-            type: "text",
-            value: "React is a JavaScript library for building user interfaces. It allows component-based development and makes UI updates efficient using the virtual DOM."
-         },
-         {
-            type: "code",
-            value: "import React from 'react'; \n function App() { \n return <h1>Hello, MERN Stack!</h1>; \n } \n export default App;"
-         }
-      ],
-      videoLink: "https://youtu.be/Vi9bxu-M-ag?si=mnqtIFuQBMowcy6r",
-      readTime: "12 min read",
-      date: "March 1, 2025",
-   },
-   {
-      slug: "secure-authentication-node",
-      title: "Secure Authentication in Node.js with JWT",
-      author: "Buddhadeb Koner",
-      avatar: "/buddhadeb.png",
-      imageUrl: "/exampleImage.jpeg",
-      content: [
-         {
-            type: "text",
-            value: "Authentication is a critical part of any web application. JSON Web Tokens (JWT) provide a secure way to manage authentication in Node.js applications."
-         },
-         {
-            type: "text",
-            value: "JWT consists of three parts: Header, Payload, and Signature. It is used to securely transmit information between parties as a JSON object."
-         },
-         {
-            type: "code",
-            value: "const jwt = require('jsonwebtoken'); \n const token = jwt.sign({ userId: '12345' }, 'secretkey', { expiresIn: '1h' }); \n console.log(token);"
-         },
-         {
-            type: "text",
-            value: "To verify a JWT, the server checks if the token is valid using the secret key."
-         },
-         {
-            type: "code",
-            value: "jwt.verify(token, 'secretkey', (err, decoded) => { \n if (err) return res.status(401).json({ message: 'Unauthorized' }); \n console.log(decoded); \n });"
-         },
-         {
-            type: "text",
-            value: "For enhanced security, always store tokens securely, use HTTPS, and implement proper token expiration and refresh strategies."
-         }
-      ],
-      videoLink: "https://youtu.be/xrj3zzaqODw?si=1DMMdp2RvzlLyWBs",
-      readTime: "9 min read",
-      date: "March 5, 2025",
-   }
-];
-
-
-
+interface Blog {
+   _id: string;
+   title: string;
+   author: {
+      fullName: string;
+      profileImage: string;
+   };
+   readTime: string;
+   content: {
+      type: string;
+      value: string;
+      _id: string;
+   }[];
+   imageUrl: string;
+   slugParams: string;
+   videoLink: string;
+}
 
 export default function BlogDetailPage() {
+   const [blog, setBlog] = useState<Blog | null>(null);
+   const [error, setError] = useState<string | null>(null);
+   const [loading, setLoading] = useState<boolean>(true);
    const { slug } = useParams();
-   const blog = blogs.find((b) => b.slug === slug);
+   console.log("Slug:", slug);
 
-   if (!blog) return notFound();
+
+   useEffect(() => {
+      if (!slug) return;
+
+      const fetchBlog = async () => {
+         try {
+            const response = await fetch(`/api/blogs/${slug}`);
+            console.log("API Response Status:", response.status);
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.message || "Failed to fetch blog!");
+
+            setBlog(data.blog);
+         } catch (error) {
+            setError(error instanceof Error ? error.message : "An unknown error occurred");
+         } finally {
+            setLoading(false);
+         }
+      };
+
+      fetchBlog();
+   }, [slug]);
+
+   if (loading) {
+      return <div className="min-h-screen flex items-center justify-center text-gray-400 text-xl">Loading...</div>;
+   }
+
+   if (error) {
+      return <div className="min-h-screen flex items-center justify-center text-red-500 text-xl">{error}</div>;
+   }
+
+   if (!blog) {
+      return <div className="min-h-screen flex items-center justify-center text-gray-400 text-xl">Blog not found!</div>;
+   }
 
    return (
       <>
          <Logo />
-         <div className="min-h-screen bg-transparent text-white lg:py-10 py-20 px-6 md:px-20 ">
-            {/* Hero Section */}
+         <div className="min-h-screen bg-transparent text-white lg:py-10 py-20 px-6 md:px-20">
+            {/* Breadcrumb */}
             <section className="max-w-4xl mx-auto">
                <p className="text-gray-400 text-base py-5">
-                  <Link href={`/blog`} className="text-blue-400 underline">
-                     BLOGS
-                  </Link>{' '}/ {' '}
-                  <span>
-                     {blog.title.length > 25 ? `${blog.title.slice(0, 20)}...` : blog.title}
-                  </span>
+                  <Link href="/blog" className="text-blue-400 underline">BLOGS</Link> / {blog.title.length > 25 ? `${blog.title.slice(0, 20)}...` : blog.title}
                </p>
                <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-lg">
                   <Image src={blog.imageUrl} alt={blog.title} layout="fill" objectFit="cover" />
@@ -122,30 +89,27 @@ export default function BlogDetailPage() {
 
             {/* Blog Content */}
             <div className="max-w-4xl mx-auto mt-10 flex flex-col md:flex-row gap-10">
-               {/* Main Content */}
-               <article className="flex-1 min-w-0">
-                  {/* Author Section */}
-                  <div className="flex items-center space-x-4 mb-6">
-                     <Image src={blog.avatar} alt={blog.author} width={50} height={50} className="rounded-full" />
+               <div className="w-full md:w-3/4">
+                  {/* Author Info */}
+                  <div className="flex items-center gap-4 mb-6">
+                     <Image src={blog.author.profileImage} alt={blog.author.fullName} width={50} height={50} className="rounded-full" />
                      <div>
-                        <p className="text-gray-300 text-lg font-semibold">{blog.author}</p>
-                        <p className="text-gray-500 text-sm">{blog.date} • {blog.readTime}</p>
+                        <p className="text-lg font-semibold">{blog.author.fullName}</p>
+                        <p className="text-gray-400 text-sm">{blog.readTime}</p>
                      </div>
                   </div>
-
-                  {/* Blog Text - Handling Different Content Types */}
-                  <div className="text-gray-400 text-lg leading-relaxed space-y-4">
-                     {blog.content.map((block, index) => (
-                        <div key={index}>
-                           {block.type === "text" && <p>{block.value}</p>}
-                           {block.type === "code" && (
-                              <pre className="bg-gray-800 p-4 rounded-lg overflow-x-auto">
-                                 <code className="whitespace-pre-wrap break-words">{block.value}</code>
-                              </pre>
-                           )}
-                        </div>
-                     ))}
-                  </div>
+                  {/* Blog Content */}
+                  {blog.content.map((item) => (
+                     <div key={item._id} className="mb-4">
+                        {item.type === "text" ? (
+                           <p className="text-lg text-gray-200">{item.value}</p>
+                        ) : (
+                           <pre className="bg-gray-800 p-4 rounded-md overflow-x-auto text-gray-300">
+                              <code>{item.value}</code>
+                           </pre>
+                        )}
+                     </div>
+                  ))}
 
                   {/* Video section if present */}
                   {blog.videoLink && (
@@ -162,15 +126,14 @@ export default function BlogDetailPage() {
                         </div>
                      </div>
                   )}
-               </article>
-
-               {/* Sidebar */}
-               <div className="w-full md:w-64 flex-shrink-0">
-                  <BlogSidebarCard blog={blog} />
+               </div>
+               <div className="w-full md:w-1/4">
+                  <BlogSidebarCard
+                     author={blog.author}
+                  />
                </div>
             </div>
          </div>
-
       </>
    );
 }

@@ -7,7 +7,6 @@ export interface IUser {
    fullName: string;
    isVarified?: boolean;
    bookMarked?: mongoose.Types.ObjectId[]; 
-   isEdited?: boolean;
    profileImage?: string;
    _id?: mongoose.Types.ObjectId;
 }
@@ -17,8 +16,11 @@ const userSchema = new Schema<IUser>({
    password: { type: String, required: true },
    fullName: { type: String, required: true },
    isVarified: { type: Boolean, default: false },
-   bookMarked: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog", default: [] }], 
-   isEdited: { type: Boolean, default: false },
+   bookMarked: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: 'Blog',
+      }], 
    profileImage: { type: String, default: "" },
 }, { timestamps: true });
 
