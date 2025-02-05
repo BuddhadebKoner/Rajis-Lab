@@ -23,6 +23,7 @@ interface Blog {
    imageUrl: string;
    slugParams: string;
    videoLink: string;
+   updatedAt: string;
 }
 
 export default function BlogDetailPage() {
@@ -100,15 +101,36 @@ export default function BlogDetailPage() {
                      <Image src={blog.author.profileImage} alt={blog.author.fullName} width={50} height={50} className="rounded-full" />
                      <div>
                         <p className="text-lg font-semibold">{blog.author.fullName}</p>
-                        <p className="text-gray-400 text-sm">{blog.readTime}</p>
+                        <div className="flex items-center gap-4">
+                           <p className="text-gray-400 text-sm">
+                              {new Date(blog.updatedAt).toLocaleDateString("en-IN", {
+                                 month: "long",
+                                 day: "numeric",
+                                 year: "numeric",
+                              })}
+                           </p>
+                           <p className="text-gray-400 text-sm">{blog.readTime}</p>
+                        </div>
                      </div>
                   </div>
                   {/* Blog Content */}
                   {blog.content.map((item) => (
                      <div key={item._id} className="mb-4">
-                        {item.type === "text" ? (
+                        {item.type === "text" && (
                            <p className="text-lg text-gray-200">{item.value}</p>
-                        ) : (
+                        )}
+                        {item.type === "heading" && (
+                           <h2 className="text-2xl font-bold text-white">{item.value}</h2>
+                        )}
+                        {item.type === "bold" && (
+                           <p className="text-lg font-semibold text-gray-100">{item.value}</p>
+                        )}
+                        {item.type === "highlight" && (
+                           <p className="text-lg bg-yellow-300 text-black px-2 py-1 inline-block rounded">
+                              {item.value}
+                           </p>
+                        )}
+                        {item.type === "code" && (
                            <pre className="bg-gray-800 p-4 rounded-md overflow-x-auto text-gray-300">
                               <code>{item.value}</code>
                            </pre>

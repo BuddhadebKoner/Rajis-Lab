@@ -25,7 +25,7 @@ const blogSchema = new Schema<IBlogs>({
    isPublished: { type: Boolean, default: false },
    isEdited: { type: Boolean, default: false },
    content: [{
-      type: { type: String, enum: ["text", "code", "highlight"], required: true },
+      type: { type: String, enum: ["text", "code", "heading", "bold", "highlight"], required: true },
       value: { type: String, required: true },
    }],
 }, { timestamps: true });

@@ -22,12 +22,10 @@ export default function BlogPage() {
    const [error, setError] = useState<string | null>(null);
 
    useEffect(() => {
-      // Check if blogs data is already in sessionStorage
       const cachedBlogs = sessionStorage.getItem("blogs");
       if (cachedBlogs) {
-         setBlogs(JSON.parse(cachedBlogs)); // Use cached data
+         setBlogs(JSON.parse(cachedBlogs)); 
       } else {
-         // If no cached data, fetch from API
          const fetchBlogs = async () => {
             try {
                const response = await fetch("/api/blogs/");
@@ -35,7 +33,7 @@ export default function BlogPage() {
 
                const data = await response.json();
                setBlogs(data.blogs);
-               sessionStorage.setItem("blogs", JSON.stringify(data.blogs)); // Cache the data in sessionStorage
+               sessionStorage.setItem("blogs", JSON.stringify(data.blogs));
             } catch (error) {
                setError(error instanceof Error ? error.message : "An unknown error occurred");
             }
@@ -43,7 +41,7 @@ export default function BlogPage() {
 
          fetchBlogs();
       }
-   }, []); // Empty dependency array ensures it runs once when the component is mounted
+   }, []); 
 
    return (
       <div className="w-full min-h-screen lg:py-0 py-20">
