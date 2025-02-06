@@ -53,22 +53,27 @@ export async function POST(request: NextRequest) {
    }
 }
 
-// get all blogs
-export async function GET() {
+// get paginated blogs
+export async function GET(req: NextRequest) {
    try {
       await connectToDatabase();
+
+      const searchParams = req.nextUrl.searchParams;
+      const page = parseInt(searchParams.get("page") || "1", 10);
+      const limit = parseInt(searchParams.get("limit") || "5", 10);
+      const skip = (page - 1) * limit;
+
       const blogs = await Blog.find()
          .populate({ path: "author", model: User, select: "fullName profileImage" })
-      
-      if (!blogs) { 
-         return NextResponse.json(
-            { error: "No blogs found" },
-            { status: 404 }
-         )
-      }
+         .sort({ createdAt: -1 })
+         .skip(skip)
+         .limit(limit);
 
-      return NextResponse.json({ blogs }, { status: 200 });
-   } catch {
+      const totalBlogs = await Blog.countDocuments();
+
+      return NextResponse.json({ blogs, totalBlogs }, { status: 200 });
+   } catch (error) {
+      console.error("Error fetching blogs:", error);
       return NextResponse.json({ error: "Failed to get blogs" }, { status: 500 });
    }
 }

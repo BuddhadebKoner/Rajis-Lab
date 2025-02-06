@@ -23,7 +23,7 @@ export async function GET(
 
       const { id } = resolvedParams;
 
-      const blog = await Blog.findById(id)
+      const blog = await Blog.findOne({ slugParams: id })
          .populate({ path: "author", model: User, select: "fullName profileImage" })
 
       if (!blog) {

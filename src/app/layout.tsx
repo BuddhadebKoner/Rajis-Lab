@@ -29,7 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navbar className="top-5" />
-        <div className="w-full min-w-full overflow-hidden">{children}</div>
+        <div className="w-full min-w-full overflow-hidden">
+            {children}
+        </div>
         <div className="relative">
           <Footer />
         </div>

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface BlogCardProps {
-   _id: string;
    title: string;
    author: {
       profileImage: string;
@@ -12,20 +11,20 @@ interface BlogCardProps {
    timeToRead: number | string;
    content: string;
    imageUrl: string;
-   slug: string;
+   slugParams: string;
 }
 
 export default function BlogCard({
-   _id,
    title,
    author,
    timeToRead,
    content,
    imageUrl,
+   slugParams
 }: BlogCardProps) {
    return (
       <div className="max-w-xs w-full group">
-         <Link href={`/blog/${_id}`} className="block">
+         <Link href={`/blog/${slugParams}`} className="block">
             <div
                className={cn(
                   "cursor-pointer overflow-hidden relative h-96 rounded-md shadow-xl max-w-sm mx-auto flex flex-col justify-between p-4 transition-all duration-300"
