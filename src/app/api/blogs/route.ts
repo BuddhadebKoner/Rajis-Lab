@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
    try {
       await connectToDatabase();
 
-      const searchParams = req.nextUrl.searchParams;
+      const searchParams = new URL(req.url).searchParams;
       const page = parseInt(searchParams.get("page") || "1", 10);
       const limit = parseInt(searchParams.get("limit") || "5", 10);
       const skip = (page - 1) * limit;
@@ -67,11 +67,15 @@ export async function GET(req: NextRequest) {
          .populate({ path: "author", model: User, select: "fullName profileImage" })
          .sort({ createdAt: -1 })
          .skip(skip)
-         .limit(limit);
+         .limit(limit)
+         .lean(); // Optimize performance by returning plain objects
 
       const totalBlogs = await Blog.countDocuments();
 
-      return NextResponse.json({ blogs, totalBlogs }, { status: 200 });
+      return NextResponse.json(
+         { blogs, totalBlogs, page, totalPages: Math.ceil(totalBlogs / limit) },
+         { status: 200 }
+      );
    } catch (error) {
       console.error("Error fetching blogs:", error);
       return NextResponse.json({ error: "Failed to get blogs" }, { status: 500 });

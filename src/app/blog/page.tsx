@@ -1,57 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Logo from "@/components/shared/Logo";
 import BlogCard from "@/components/shared/BlogCard";
-import { getAllBlogs } from "../../../api-calls/blogs-api";
-
-interface Blog {
-   _id: string;
-   title: string;
-   author: {
-      fullName: string;
-      profileImage: string;
-   };
-   readTime: string;
-   content: { type: string; value: string }[];
-   imageUrl: string;
-   slugParams: string;
-}
+import { useGetBlogs } from "../../../utils/react-query/queriesAndMutation";
 
 export default function BlogPage() {
-   const [blogs, setBlogs] = useState<Blog[]>([]);
-   const [error, setError] = useState<string | null>(null);
-   const [page, setPage] = useState(1);
-   const [totalBlogs, setTotalBlogs] = useState(0);
-   const limit = 10;
+   const {
+      data,
+      error,
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
+   } = useGetBlogs();
 
-   const fetchBlogs = async (pageNumber = 1) => {
-      try {
-         const data = await getAllBlogs(pageNumber, limit);
-
-         if (!data || !data.blogs) {
-            throw new Error("Failed to fetch blogs!");
-         }
-
-         console.log(data);
-         setBlogs((prevBlogs) =>
-            pageNumber === 1 ? data.blogs : [...prevBlogs, ...data.blogs]
-         );
-         setTotalBlogs(data.totalBlogs);
-      } catch (error) {
-         setError(error instanceof Error ? error.message : "An unknown error occurred");
-      }
-   };
-
-   useEffect(() => {
-      fetchBlogs();
-   }, []);
-
-   const loadMoreBlogs = () => {
-      const nextPage = page + 1;
-      setPage(nextPage);
-      fetchBlogs(nextPage);
-   };
+   const blogs = data?.pages.flatMap((page) => page.blogs) || [];
 
    return (
       <div className="w-full min-h-screen lg:py-0 py-20">
@@ -60,7 +23,7 @@ export default function BlogPage() {
             My Blogs
          </h1>
 
-         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+         {error && <p className="text-red-500 text-center mt-4">Failed to load blogs.</p>}
 
          <div className="w-full bg-transparent text-white pt-10 flex flex-wrap justify-center items-center gap-10">
             {blogs.length > 0 ? (
@@ -75,7 +38,7 @@ export default function BlogPage() {
                      timeToRead={blog.readTime}
                      content={
                         blog.content
-                           .map((item) => item.value)
+                           .map((item: { value: string }) => item.value)
                            .join(" ")
                            .slice(0, 100) + "..."
                      }
@@ -89,13 +52,14 @@ export default function BlogPage() {
          </div>
 
          {/* Load More Button */}
-         {blogs.length < totalBlogs && (
+         {hasNextPage && (
             <div className="flex justify-center mt-6">
                <button
-                  onClick={loadMoreBlogs}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 disabled:opacity-50"
                >
-                  See More
+                  {isFetchingNextPage ? "Loading..." : "See More"}
                </button>
             </div>
          )}

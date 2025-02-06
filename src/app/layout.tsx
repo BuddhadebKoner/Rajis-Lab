@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/NavbarDoc";
 import Footer from "@/components/shared/Footer";
 import GoToTopButton from "@/components/shared/Gototop";
+import { QueryProvider } from "../../utils/react-query/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,13 +29,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar className="top-5" />
-        <div className="w-full min-w-full overflow-hidden">
+        <QueryProvider>
+          <Navbar className="top-5" />
+          <div className="w-full min-w-full overflow-hidden">
             {children}
-        </div>
-        <div className="relative">
-          <Footer />
-        </div>
+          </div>
+          <div className="relative">
+            <Footer />
+          </div>
+        </QueryProvider>
         <GoToTopButton />
       </body>
     </html>

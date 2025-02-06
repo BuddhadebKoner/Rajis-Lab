@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/components/shared/Logo";
 import BlogSidebarCard from "@/components/shared/BlogSidebarCard";
-import { useParams } from "next/navigation";
+import { useGetOneBlog } from "../../../../utils/react-query/queriesAndMutation";
 
 interface Blog {
    _id: string;
@@ -22,57 +22,38 @@ interface Blog {
    }[];
    imageUrl: string;
    slugParams: string;
-   videoLink: string;
+   videoLink?: string;
    updatedAt: string;
 }
 
 export default function BlogDetailPage() {
-   const [blog, setBlog] = useState<Blog | null>(null);
-   const [error, setError] = useState<string | null>(null);
-   const [loading, setLoading] = useState<boolean>(true);
    const { slug } = useParams();
+   const { data, error, isLoading } = useGetOneBlog(slug as string);
 
-   useEffect(() => {
-      if (!slug) return;
-
-      // Check if the blog is already cached in sessionStorage
-      const cachedBlog = sessionStorage.getItem(`blog_${slug}`);
-      if (cachedBlog) {
-         setBlog(JSON.parse(cachedBlog)); // Use cached blog data
-         setLoading(false); // No need to fetch data
-      } else {
-         // Fetch the blog data from the API if not cached
-         const fetchBlog = async () => {
-            try {
-               const response = await fetch(`/api/blogs/${slug}`);
-               const data = await response.json();
-
-               if (!response.ok) throw new Error(data.message || "Failed to fetch blog!");
-
-               setBlog(data.blog);
-               sessionStorage.setItem(`blog_${slug}`, JSON.stringify(data.blog)); // Cache the blog data in sessionStorage
-            } catch (error) {
-               setError(error instanceof Error ? error.message : "An unknown error occurred");
-            } finally {
-               setLoading(false);
-            }
-         };
-
-         fetchBlog();
-      }
-   }, [slug]);
-
-   if (loading) {
-      return <div className="min-h-screen flex items-center justify-center text-gray-400 text-xl">Loading...</div>;
+   if (isLoading) {
+      return (
+         <div className="min-h-screen flex items-center justify-center text-gray-400 text-xl">
+            Loading blog...
+         </div>
+      );
    }
 
-   if (error) {
-      return <div className="min-h-screen flex items-center justify-center text-red-500 text-xl">{error}</div>;
+   if (error || !data?.blog) {
+      return (
+         <div className="min-h-screen flex items-center justify-center text-red-500 text-xl">
+            {error?.message || "Blog not found!"}
+         </div>
+      );
    }
 
-   if (!blog) {
-      return <div className="min-h-screen flex items-center justify-center text-gray-400 text-xl">Blog not found!</div>;
-   }
+   const blog: Blog = data.blog;
+
+   // Extract YouTube video ID
+   const getYouTubeID = (url: string | undefined) => {
+      if (!url) return null;
+      const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/);
+      return match ? match[1] : null;
+   };
 
    return (
       <>
@@ -113,18 +94,13 @@ export default function BlogDetailPage() {
                         </div>
                      </div>
                   </div>
+
                   {/* Blog Content */}
                   {blog.content.map((item) => (
                      <div key={item._id} className="mb-4">
-                        {item.type === "text" && (
-                           <p className="text-lg text-gray-200">{item.value}</p>
-                        )}
-                        {item.type === "heading" && (
-                           <h2 className="text-2xl font-bold text-white">{item.value}</h2>
-                        )}
-                        {item.type === "bold" && (
-                           <p className="text-lg font-semibold text-gray-100">{item.value}</p>
-                        )}
+                        {item.type === "text" && <p className="text-lg text-gray-200">{item.value}</p>}
+                        {item.type === "heading" && <h2 className="text-2xl font-bold text-white">{item.value}</h2>}
+                        {item.type === "bold" && <p className="text-lg font-semibold text-gray-100">{item.value}</p>}
                         {item.type === "highlight" && (
                            <p className="text-lg bg-yellow-300 text-black px-2 py-1 inline-block rounded">
                               {item.value}
@@ -139,12 +115,12 @@ export default function BlogDetailPage() {
                   ))}
 
                   {/* Video section if present */}
-                  {blog.videoLink && (
+                  {blog.videoLink && getYouTubeID(blog.videoLink) && (
                      <div className="mt-10">
                         <div className="relative h-0 pb-[56.25%]">
                            <iframe
                               className="absolute top-0 left-0 w-full h-full"
-                              src={`https://www.youtube.com/embed/${new URL(blog.videoLink).pathname.split("/")[1]}`}
+                              src={`https://www.youtube.com/embed/${getYouTubeID(blog.videoLink)}`}
                               title="YouTube video player"
                               frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -155,9 +131,7 @@ export default function BlogDetailPage() {
                   )}
                </div>
                <div className="w-full md:w-1/4">
-                  <BlogSidebarCard
-                     author={blog.author}
-                  />
+                  <BlogSidebarCard author={blog.author} />
                </div>
             </div>
          </div>
